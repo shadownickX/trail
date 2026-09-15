@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="430" viewBox="0 0 1400 430" role="img" aria-labelledby="title desc">
+  <title id="title">How TRAIL follows wallet rotation</title>
+  <desc id="desc">A source token leads to seller wallets, their next verified purchases, and deployer relationship evidence.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07110c"/><stop offset="1" stop-color="#0d1b13"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .label{font:700 18px Inter,Arial,sans-serif;fill:#f3f7ef;letter-spacing:.8px}.micro{font:500 13px Inter,Arial,sans-serif;fill:#8ca294;letter-spacing:1.4px}.value{font:800 28px Inter,Arial,sans-serif;fill:#c8ff00}.box{fill:#0b1710;stroke:#294333;stroke-width:2}.line{fill:none;stroke:#6d8e78;stroke-width:2}.hot{fill:none;stroke:#c8ff00;stroke-width:3;filter:url(#glow)}
+    </style>
+  </defs>
+  <rect width="1400" height="430" rx="26" fill="url(#bg)"/>
+  <g opacity=".13" stroke="#8eae98"><path d="M0 86H1400M0 172H1400M0 258H1400M0 344H1400"/><path d="M140 0V430M280 0V430M420 0V430M560 0V430M700 0V430M840 0V430M980 0V430M1120 0V430M1260 0V430"/></g>
+  <text x="70" y="56" class="micro">THE RESEARCH ROUTE</text>
+  <path d="M260 218C342 218 348 126 430 126M260 218C342 218 348 218 430 218M260 218C342 218 348 310 430 310" class="line"/>
+  <path d="M590 126C660 126 668 218 745 218M590 218H745M590 310C660 310 668 218 745 218" class="hot"/>
+  <path d="M940 218H1060" class="hot"/>
+  <rect x="70" y="153" width="190" height="130" rx="20" class="box"/>
+  <text x="95" y="190" class="micro">SOURCE TOKEN</text><text x="95" y="238" class="label">YOUR TOKEN</text><text x="95" y="265" class="micro">SELL WINDOW · 15M</text>
+  <g><rect x="430" y="82" width="160" height="88" rx="18" class="box"/><rect x="430" y="174" width="160" height="88" rx="18" class="box"/><rect x="430" y="266" width="160" height="88" rx="18" class="box"/>
+    <text x="454" y="112" class="micro">SELLER 01</text><text x="454" y="147" class="label">0x4A…91</text><text x="454" y="204" class="micro">SELLER 02</text><text x="454" y="239" class="label">0x8C…2F</text><text x="454" y="296" class="micro">SELLER 03</text><text x="454" y="331" class="label">0x11…D7</text></g>
+  <rect x="745" y="142" width="195" height="152" rx="22" fill="#102218" stroke="#c8ff00" stroke-width="2"/>
+  <text x="772" y="177" class="micro">NEXT VERIFIED BUY</text><text x="772" y="225" class="value">TOKEN BBB</text><text x="772" y="258" class="label">14 WALLETS</text><text x="772" y="280" class="micro">3.8 ETH COMBINED</text>
+  <rect x="1060" y="92" width="270" height="252" rx="22" class="box"/>
+  <text x="1088" y="127" class="micro">EXPAND THE EVIDENCE</text><text x="1088" y="169" class="label">9 / 14 LINKED</text>
+  <circle cx="1100" cy="207" r="5" fill="#c8ff00"/><text x="1118" y="213" class="micro">DIRECT TRANSFER</text>
+  <circle cx="1100" cy="244" r="5" fill="#83bf72"/><text x="1118" y="250" class="micro">SHARED FUNDING</text>
+  <circle cx="1100" cy="281" r="5" fill="#47765b"/><text x="1118" y="287" class="micro">SAME FEE RECIPIENT</text>
+  <text x="1088" y="324" class="label">CREATOR TAX · 5%</text>
+  <text x="70" y="392" class="micro">OBSERVATIONS, SOURCES, COVERAGE — NEVER AN UNEXPLAINED SAFE BADGE</text>
+</svg>
