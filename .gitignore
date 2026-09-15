@@ -1,0 +1,19 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and builds
+node_modules/
+dist/
+build/
+coverage/
+
+# Local data
+.trail/
+*.log
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
