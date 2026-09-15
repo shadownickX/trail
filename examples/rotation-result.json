@@ -1,0 +1,20 @@
+{
+  "illustrative": true,
+  "sourceToken": "0xSOURCE",
+  "lookbackMinutes": 15,
+  "coverage": {
+    "status": "partial",
+    "note": "Example schema only; no live chain query was performed."
+  },
+  "destinations": [
+    {
+      "token": "BBB",
+      "buyersAfterExit": 14,
+      "linkedBuyers": 9,
+      "combinedBuyEth": 3.8,
+      "creatorTaxPercent": 5,
+      "relationships": ["direct transfer"],
+      "continuation": "holding"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+name: Feature request
+description: Propose a focused improvement to the research workflow.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Research problem
+      description: Describe the decision that is difficult today.
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Evidence TRAIL should expose
+      description: Name the observable event or relationship, not a safety verdict.
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Known limitations
+      description: Explain what the proposed result would not prove.

@@ -1,0 +1,25 @@
+name: Bug report
+description: Report an incorrect route, relationship, or interface behavior.
+title: "[Bug]: "
+labels: [bug, needs-triage]
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: What did TRAIL show?
+      description: Include the source token, time window, result block, and visible coverage.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction evidence
+      description: Add transaction hashes or public explorer links. Never include private keys or secrets.
+    validations:
+      required: true
