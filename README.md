@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/trail-banner.svg" width="100%" alt="TRAIL — follow wallet rotation and inspect deployer connections" />
+  <img src="assets/trail-banner.webp" width="100%" alt="TRAIL — follow wallet rotation and inspect deployer connections" />
 </p>
 
 <h1 align="center">TRAIL</h1>
@@ -144,14 +144,25 @@ Performance claims will be published only after reproducible measurements. The p
 ## Project map
 
 ```text
+.github/                Issue and pull-request templates
 assets/                 Brand, mascot, diagrams, and interface studies
-docs/
-  PRODUCT.md            Product scope, primary flow, and result model
-  METHODOLOGY.md        Event definitions, evidence labels, and limitations
-  ROADMAP.md            Delivery sequence for the first usable release
-README.md               Product overview
-LICENSE                 MIT license
+config/                 Runtime configuration contract and secret boundaries
+data/                   Dataset, fixture, and provenance conventions
+docs/                   Product, architecture, methodology, and roadmap
+examples/               Illustrative API and rotation-result payloads
+scripts/                Repeatable development and data-maintenance tasks
+src/
+  api/                   Read-only query surface
+  chain/                 Robinhood Chain access and normalization
+  events/                Sale and purchase classification
+  relationships/        Deployer, funding, and fee evidence
+  rotation/             Seller-to-next-purchase sequencing
+  storage/               Indexed history and provenance
+  ui/                    Table, graph, and evidence-card views
+tests/                   Unit, integration, and fixture conventions
 ```
+
+Each directory currently defines a clear ownership boundary before implementation begins. See [architecture](docs/ARCHITECTURE.md) for the intended data flow and [data model](docs/DATA_MODEL.md) for the evidence contract.
 
 ## Status
 
