@@ -1,179 +1,208 @@
 <p align="center">
-  <img src="assets/trail-ant-avatar.png" width="128" alt="TRAIL ant mascot" />
+  <img src="assets/trail-ant-avatar.png" width="118" alt="TRAIL ant mascot" />
 </p>
 
 <p align="center">
-  <img src="assets/trail-banner.webp" width="100%" alt="TRAIL — follow wallet rotation and inspect deployer connections" />
+  <img src="assets/trail-banner.webp" width="100%" alt="TRAIL — wallet rotation intelligence" />
 </p>
 
 <h1 align="center">TRAIL</h1>
 
+<p align="center"><strong>Follow the money after it leaves.</strong></p>
+
 <p align="center">
-  <strong>Follow the rotation. Check the connections.</strong><br/>
-  See what a token's sellers bought next — and who stands behind those next tokens.
+  Read-only wallet rotation intelligence for Robinhood Chain.
+  <br />
+  Find what confirmed sellers bought next — then inspect the evidence around the destination token.
 </p>
 
 <p align="center">
-  <img alt="Robinhood Chain" src="https://img.shields.io/badge/Robinhood%20Chain-research-c8ff00?style=flat-square&labelColor=07100b" />
+  <a href="https://trail-wallet-intelligence.teamconfluence.chatgpt.site">OPEN LIVE SCANNER ↗</a>
+  ·
+  <a href="https://x.com/doublenickk">X / @DOUBLENICKK ↗</a>
+</p>
+
+<p align="center">
+  <img alt="Robinhood Chain" src="https://img.shields.io/badge/Robinhood%20Chain-4663-c8ff00?style=flat-square&labelColor=07100b" />
+  <img alt="Data" src="https://img.shields.io/badge/data-live%20Blockscout-c8ff00?style=flat-square&labelColor=07100b" />
   <img alt="Mode" src="https://img.shields.io/badge/mode-read--only-c8ff00?style=flat-square&labelColor=07100b" />
-  <img alt="Stage" src="https://img.shields.io/badge/stage-v0.1%20spec-c8ff00?style=flat-square&labelColor=07100b" />
-  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-c8ff00?style=flat-square&labelColor=07100b" /></a>
-</p>
-
-<p align="center">
-  <a href="#the-product">Product</a> ·
-  <a href="#the-workflow">Workflow</a> ·
-  <a href="#what-each-result-shows">Evidence</a> ·
-  <a href="#first-release">First release</a> ·
-  <a href="docs/METHODOLOGY.md">Methodology</a>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-c8ff00?style=flat-square&labelColor=07100b" />
 </p>
 
 ---
 
-## The product
+## What TRAIL does
 
-**TRAIL is an onchain research workspace for wallet rotation on Robinhood Chain.**
+TRAIL is a research-first scanner for wallet rotation on Robinhood Chain. Paste a token contract, choose a seller window, and the live scanner follows a strict evidence path:
 
-Paste the contract address of a token you already follow. TRAIL finds wallets that sold it during a selected window, identifies their next genuine purchases, and opens the deployer and fee relationships behind every destination token.
+`source token → confirmed seller → next confirmed purchase → destination origin → deployer relationship`
 
-The point is not to label a token `SAFE`. The point is to show the route, the participants, the observable links, and the missing data clearly enough for a trader to decide what deserves deeper research.
+The product is designed to expose a route, not manufacture a confidence score. It does not sign transactions, custody funds, or call a token safe.
 
-<p align="center">
-  <img src="assets/product-board.svg" width="100%" alt="TRAIL product board showing wallet rotation and deployer connections" />
-</p>
+## The live product
 
-## The thirty-second read
+The [TRAIL scanner](https://trail-wallet-intelligence.teamconfluence.chatgpt.site) currently provides:
 
-Start with one token. TRAIL answers three questions:
+- contract-address input with a selectable lookback window;
+- indexed source-token transfers from Blockscout;
+- qualifying seller detection based on wallet-level token flow;
+- confirmed next-purchase discovery;
+- destination grouping by token and buyer cohort;
+- current holding checks when the indexer exposes a balance;
+- deployer-origin lookup;
+- direct buyer ↔ deployer transaction evidence;
+- coverage, timestamps, and explicit missing-data states;
+- a copyable evidence report.
 
-| Question | What TRAIL returns |
+A zero-result scan is a valid observation. It means no route matched the strict rules in that window; it is never replaced with random or illustrative values.
+
+## Evidence model
+
+TRAIL separates observations from conclusions.
+
+| Layer | Meaning |
 | --- | --- |
-| **Who left?** | Wallets that sold the source token inside the selected lookback window |
-| **Where did they go?** | Their next verified purchases, including time, size, and current position state |
-| **Who is behind it?** | Deployer history, funding paths, fee recipient, creator tax, and observable links to buyers |
+| **Source transfer** | Indexed movement involving the source token |
+| **Qualified sale** | Net source-token outflow plus receipt of another asset in a confirmed transaction |
+| **Next purchase** | A later confirmed transaction with token outflow and receipt of a non-quote token |
+| **Holding state** | Balance result returned by the indexer at scan time |
+| **Deployer link** | Literal direct transaction match between a selected buyer and destination deployer |
+| **Coverage** | What was inspected, what was capped, and what was unavailable |
 
-### Example output
+TRAIL never claims that a shared funding source proves common ownership. It never claims that a missing link proves independence. It never infers safety, intent, profitability, or identity.
 
-All values below are illustrative.
+## Workflow
 
-| Next token | Buyers after exit | Linked to deployer | Combined buys | Creator tax |
-| --- | ---: | ---: | ---: | ---: |
-| `AAA` | 18 | 1 | 4.2 ETH | 2% |
-| `BBB` | 14 | 9 | 3.8 ETH | 5% |
-| `CCC` | 7 | 0 detected | 1.1 ETH | 0% |
+1. **Enter a contract.** Use a full `0x` address on Robinhood Chain.
+2. **Choose the window.** Start with 15 minutes for a focused scan; expand when coverage is thin.
+3. **Read the seller cohort.** The scanner checks indexed token movement and reconstructs wallet-level flows.
+4. **Follow the next purchase.** Only a later qualifying swap is shown as a next purchase.
+5. **Open a destination row.** Inspect buyer count, amount, holdings, deployer, and direct links.
+6. **Copy the report.** Export the selected evidence trail for further research.
 
-Opening `BBB` reveals the route instead of hiding it behind a score:
+## Architecture
 
 ```text
-SOURCE TOKEN
-  └─ sold by 14 wallets
-       └─ next verified purchase: BBB
-            ├─ 9 buyers have direct transfers with the BBB deployer
-            ├─ combined purchase size: 3.8 ETH
-            ├─ creator tax: 5%
-            └─ current state: holding / accumulating / exiting
+Browser
+  └─ POST /api/scan
+       └─ Cloudflare Worker
+            ├─ validate contract + window
+            ├─ fetch token + transfer pages
+            ├─ inspect confirmed transaction flows
+            ├─ follow selected wallets forward
+            ├─ resolve destination origin
+            ├─ check balances and direct links
+            └─ return live_onchain JSON + coverage
+
+Blockscout API
+  └─ Robinhood Chain / 4663
 ```
 
-## The workflow
+The API credential is held as a server-side Site secret. It is never embedded in the browser bundle. The client receives only the normalized response needed to render the table and evidence panel.
 
-<p align="center">
-  <img src="assets/how-it-works.svg" width="100%" alt="TRAIL workflow from source token to seller wallets, next purchases and deployer evidence" />
-</p>
-
-1. **Paste a contract address.** Choose a lookback such as the last 15 minutes.
-2. **Resolve sellers.** TRAIL records wallets that executed a sale; ordinary token transfers do not count as purchases or sales.
-3. **Find the next purchase.** Each seller is followed forward to its next qualifying buy.
-4. **Group the rotation.** Destination tokens are ranked by participating wallets and combined purchase size.
-5. **Inspect the launch.** TRAIL expands deployer history, observed funding, fee recipients, creator tax, and buyer relationships.
-6. **Keep watching.** The table updates as wallets hold, add, or exit.
-
-## What each result shows
-
-### Route
-
-Source-token sale → next-token purchase, with transaction time, order, and amount.
-
-### Origin
-
-The destination token's deployer, previous observed launches, and available funding provenance.
-
-### Concentration
-
-Supply held by the deployer and by the selected group of observably connected wallets.
-
-### Trading cost
-
-Base fees and creator tax are displayed separately rather than compressed into one number.
-
-### Continuation
-
-Whether rotating wallets still hold the destination token, continue accumulating, or have started exiting.
-
-### Connection labels
-
-TRAIL uses literal evidence labels:
-
-- `direct transfer`
-- `shared funding source`
-- `same fee recipient`
-
-A shared funding source does **not** prove common ownership. No detected connection does **not** prove independence. See the full [methodology and evidence boundaries](docs/METHODOLOGY.md).
-
-## Why the ant?
-
-The ant is small, persistent, and useful because it follows a trail that is almost invisible on its own. One wallet movement is noise. A coordinated route across sellers, next purchases, deployers, and fee recipients becomes a pattern.
-
-That is TRAIL's job: follow every step and bring the pattern back intact.
-
-## First release
-
-The first implementation is intentionally narrow:
-
-- contract-address search;
-- selectable seller lookback;
-- live table of next verified purchases;
-- expandable buyer-to-deployer graph;
-- deployer launch and funding history;
-- base fee and creator-tax separation;
-- hold / add / exit continuation state;
-- subscriptions for material changes;
-- explicit data coverage and timestamps.
-
-Performance claims will be published only after reproducible measurements. The product will not promise a fixed response time such as `50 ms` before it is benchmarked.
-
-## Project map
+## Repository map
 
 ```text
-.github/                Issue and pull-request templates
-assets/                 Brand, mascot, diagrams, and interface studies
-config/                 Runtime configuration contract and secret boundaries
-data/                   Dataset, fixture, and provenance conventions
-docs/                   Product, architecture, methodology, and roadmap
-examples/               Illustrative API and rotation-result payloads
-scripts/                Repeatable development and data-maintenance tasks
+.github/
+  ISSUE_TEMPLATE/              Bug and feature intake
+  workflows/                   Validation and documentation checks
+  pull_request_template.md     Review contract
+
+api/                           Request and response contracts
+chain/                         Robinhood Chain adapters and normalization
+config/                        Public configuration shape and secret boundaries
+data/
+  schemas/                     Evidence and result schemas
+  provenance/                  Source and timestamp conventions
+docs/
+  API.md                       Scanner endpoint contract
+  ARCHITECTURE.md              System boundaries and data flow
+  DATA_MODEL.md                Evidence entities and relationships
+  METHODOLOGY.md               Sale and purchase definitions
+  OPERATIONS.md                Rate limits, caching, and incident notes
+  ROADMAP.md                   Measurable product stages
+events/                        Confirmed event classification
+examples/                      Live-response and empty-result examples
+fixtures/                      Sanitized transaction fixtures
+observability/                 Health, coverage, and diagnostics notes
+relationships/                 Deployer, funding, and fee evidence
+rotation/                      Seller-to-next-purchase sequencing
+scripts/                       Repeatable maintenance commands
 src/
-  api/                   Read-only query surface
-  chain/                 Robinhood Chain access and normalization
-  events/                Sale and purchase classification
-  relationships/        Deployer, funding, and fee evidence
-  rotation/             Seller-to-next-purchase sequencing
-  storage/               Indexed history and provenance
-  ui/                    Table, graph, and evidence-card views
-tests/                   Unit, integration, and fixture conventions
+  ingestion/                   Indexed data ingestion
+  normalization/               Address, token, and amount normalization
+  queries/                     Read-only query services
+  telemetry/                   Coverage and scan-status events
+  ui/                          Table, graph, and evidence components
+storage/                       Provenance and indexed history boundaries
+tests/
+  fixtures/                    Deterministic test inputs
+  integration/                 API contract checks
+  unit/                        Classification checks
+ui/                            Product surface and visual system
 ```
 
-Each directory currently defines a clear ownership boundary before implementation begins. See [architecture](docs/ARCHITECTURE.md) for the intended data flow and [data model](docs/DATA_MODEL.md) for the evidence contract.
+Every directory exists for a concrete ownership boundary. Placeholder folders are avoided; each new area contains a short contract or README explaining what belongs there.
 
-## Status
+## Data boundaries
 
-This repository currently contains the product specification and original visual system for TRAIL. The implementation will be added in measurable stages described in the [roadmap](docs/ROADMAP.md). Screens and numbers in the current documentation are interface studies, not live trading signals.
+- **Network:** Robinhood Chain, chain ID `4663`.
+- **Source:** Blockscout indexed transactions and token transfers.
+- **Mode:** read-only; no wallet connection and no signer.
+- **Credentials:** runtime secret only; never commit API keys.
+- **Response state:** live, capped, empty, or unavailable — never fabricated.
+- **Limit:** indexed data can be incomplete or delayed; the UI exposes coverage instead of hiding it.
 
-## Safety boundary
+## Development principles
 
-TRAIL is a research tool, not financial advice, a custody product, or a transaction signer. It reports observable onchain activity and data coverage; it does not prove identity, ownership, coordination, or token safety.
+1. Preserve transaction order and timestamps.
+2. Distinguish swaps from ordinary transfers.
+3. Keep source links and missing-data flags visible.
+4. Prefer a smaller confirmed result to a larger guessed result.
+5. Keep visual telemetry tied to a real product state.
+6. Do not turn onchain observations into financial advice.
+
+## Roadmap
+
+### Current
+
+- live contract scanner;
+- strict seller and next-purchase rules;
+- destination evidence table;
+- deployer origin and direct-link checks;
+- responsive TRAIL visual system.
+
+### Next
+
+- deeper native-asset flow classification;
+- persistent indexed history;
+- reproducible integration fixtures;
+- richer funding and fee-recipient graph;
+- saved scans and change tracking.
+
+### Later
+
+- authenticated workspaces;
+- scheduled monitoring;
+- exportable investigation bundles;
+- additional indexed network adapters.
+
+## Safety
+
+TRAIL is an onchain research interface. It is not a trading system, financial adviser, custody product, or transaction signer. A route is an observation to investigate — not a guarantee of safety or return.
+
+## Contributing
+
+Keep pull requests narrow and evidence-backed:
+
+1. explain the user-visible behavior;
+2. include the data definition being changed;
+3. add or update a deterministic fixture;
+4. document coverage and failure states;
+5. avoid credentials, fabricated numbers, and hidden inference.
+
+Open a focused issue before larger changes. Keep the dark green/lime visual language consistent across docs, UI, and diagrams.
 
 ---
 
-<p align="center">
-  <strong>Built for following movement, not manufacturing certainty.</strong>
-</p>
+<p align="center"><strong>Built for following movement, not manufacturing certainty.</strong></p>
