@@ -1,0 +1,5 @@
+{
+  "mode": "live_onchain",
+  "network": { "name": "Robinhood Chain", "chainId": 4663 },
+  "coverage": { "capped": false, "definition": "confirmed indexed observations only" }
+}
