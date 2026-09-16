@@ -1,0 +1,7 @@
+{
+  "mode": "live_onchain",
+  "qualifiedSellers": 0,
+  "nextPurchases": 0,
+  "destinations": [],
+  "coverage": { "capped": false }
+}
